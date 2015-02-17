@@ -1,0 +1,459 @@
+Step-by-step instructions for setting up Git Hub repository.
+(Originally from /home/jwt/WA/School/Coursera/DataScience_JohnsHopkins/05_Reproducable/Project/Project01)
+
+Reference: https://help.github.com/articles/create-a-repo
+Reference: Slides from 01_DataToolkit
+Reference: /home/jwt/School/Coursera/DataScience_JohnsHopkins/01_DataToolkit/Pro_Git.english.pdf
+
+*#) Did NOT do these steps in this case (forked an existing github repository:
+  https://github.com/rdpeng/RepData_PeerAssessment1 )
+
+
+*1) Open https://github.com/
+
+
+*2) Sign-in.
+
+
+*3) In the upper-right corner of any page, click +, and then click
+   "New repository".
+
+
+*4) Create a short, memorable name for your repository:
+   "DataScience-05_Reproducable"
+
+
+*5) Add a description of your repository:
+   "Created for the Coursera course "Getting and Cleaning Data" which is part
+   of the Johns Hopkins University Data Science Specialization"
+
+
+*6) Choose "public" repository.
+
+
+*7) Select Initialize this repository with a README.
+
+
+*8) Click Create repository.
+
+
+9) In local directory, initialize git:
+ninja{jwt}% cd /home/jwt/School/Coursera/DataScience_JohnsHopkins/05_Reproducable/Project/Project01
+ninja{jwt}% git init
+
+
+10) Create a local copy of the git repository:
+ninja{jwt}% git remote add origin https://github.com/JohnTD500/RepData_PeerAssessment1
+
+
+11) At this point, we can double-check the set up:
+ninja{jwt}% git config --global core.editor emacs  [only need to do this once]
+ninja{jwt}% git config --list
+user.name=John Tiede
+user.email=j.tiede@comcast.net
+color.ui=true
+core.editor=emacs
+core.repositoryformatversion=0
+core.filemode=true
+core.bare=false
+core.logallrefupdates=true
+remote.origin.url=https://github.com/JohnTD500/RepData_PeerAssessment1
+remote.origin.fetch=+refs/heads/*:refs/remotes/origin/*
+
+
+12) Initial commit:
+ninja{jwt}% git add activity.csv
+ninja{jwt}% git add git_step-by-step.txt
+ninja{jwt}% git add Project01.html
+ninja{jwt}% git add Project01.Rmd
+ninja{jwt}% git add README_local.txt
+
+
+13) Commit changes:
+ninja{jwt}% git commit -m "Initial project commit"
+[master (root-commit) f8ac0a3] Initial project commit
+[master (root-commit) 8515a5f] Initial project commit
+ 5 files changed, 18083 insertions(+)
+ create mode 100644 Project01.Rmd
+ create mode 100644 Project01.html
+ create mode 100644 README_local.txt
+ create mode 100644 activity.csv
+ create mode 100644 git_step-by-step.txt
+
+
+14) Save remote files locally first:
+ninja{jwt}% git pull https://github.com/JohnTD500/RepData_PeerAssessment1.git master
+From https://github.com/JohnTD500/RepData_PeerAssessment1
+ * branch            master     -> FETCH_HEAD
+Merge made by the 'recursive' strategy.
+ PA1_template.Rmd                      |  25 ++++++++++++
+ README.md                             | 168 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ activity.zip                          | Bin 0 -> 53559 bytes
+ doc/instructions.pdf                  | Bin 0 -> 187931 bytes
+ instructions_fig/sample_panelplot.png | Bin 0 -> 69753 bytes
+ 5 files changed, 193 insertions(+)
+ create mode 100644 PA1_template.Rmd
+ create mode 100644 README.md
+ create mode 100644 activity.zip
+ create mode 100644 doc/instructions.pdf
+ create mode 100644 instructions_fig/sample_panelplot.png
+
+
+15) Save local commits to Github
+ninja{jwt}% git push
+warning: push.default is unset; its implicit value is changing in
+Git 2.0 from 'matching' to 'simple'. To squelch this message
+and maintain the current behavior after the default changes, use:
+
+  git config --global push.default matching
+
+To squelch this message and adopt the new behavior now, use:
+
+  git config --global push.default simple
+
+When push.default is set to 'matching', git will push local branches
+to the remote branches that already exist with the same name.
+
+In Git 2.0, Git will default to the more conservative 'simple'
+behavior, which only pushes the current branch to the corresponding
+remote branch that 'git pull' uses to update the current branch.
+
+See 'git help config' and search for 'push.default' for further information.
+(the 'simple' mode was introduced in Git 1.7.11. Use the similar mode
+'current' instead of 'simple' if you sometimes use older versions of Git)
+
+Username for 'https://github.com': JohnTD500
+Password for 'https://JohnTD500@github.com': 
+Counting objects: 10, done.
+Delta compression using up to 4 threads.
+Compressing objects: 100% (9/9), done.
+Writing objects: 100% (9/9), 178.97 KiB | 0 bytes/s, done.
+Total 9 (delta 2), reused 0 (delta 0)
+To https://github.com/JohnTD500/RepData_PeerAssessment1
+   c052538..f9e8cd0  master -> master
+
+
+16) Get the status
+ninja{jwt}% git status
+On branch master
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+
+        modified:   git_step-by-step.txt
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+
+        #git_step-by-step.txt#
+        .#git_step-by-step.txt
+        git_step-by-step.txt~
+        repdata_data_activity.zip
+
+no changes added to commit (use "git add" and/or "git commit -a")
+
+################################################################################
+
+17) Setup gh-pages:
+Reference: https://class.coursera.org/predmachlearn-010/forum/thread?thread_id=107
+
+Git/Github can be a little confusing at first, but it's really not that hard. 
+Let's take it step by step:
+
+First, a few prereqs:  I will assume you have set up Git and Github and that you 
+have a command-line tool like Git Bash available. You can read more about all 
+that here.
+
+1) First thing's first. Go to your github account and create a new repository. 
+Name it whatever you like. Don't initialize it with a readme. When you're done 
+you should be taken to a page that looks like this:
+
+github_repo.png
+
+leave this page open in your browser as we'll need the link in a little bit.
+
+2) Now, on your computer, create a folder where you want to keep your R project. 
+Once it's made, fire up RStudio, navigate to that folder, set it as your working 
+directory, and create a new R Markdown file. SUPER IMPORTANT: This file must be 
+saved as "Index.Rmd"
+
+3) After you do some work on your project you'll want to knit your R Markdown to 
+html. After that you should have a file in your directory called "Index.html"  
+
+4) Fire up your Git shell (I use Git Bash) and navigate to your project's 
+directory and type:
+
+git init
+
+
+This will initialize a git repository there. Now we need to tie to to github. in 
+the command below replace [your url here] with this link in your github page:
+
+github_repo2.png
+
+5) Now, in your shell, type the following:
+
+git add .
+git commit -m 'my first commit'
+git remote add origin [your url here]
+git branch gh-pages
+
+
+This creates your first commit and the required gh-pages branch. You must do an 
+initial commit before creating the new branch. Now push it all to github:
+
+git push origin --all
+
+
+This will push your changes up to both branches. Wait a little while (sometimes 
+a couple hours, but usually a few minutes) and then navigate to [your github 
+username].github.io/[your repo name]...  for example, for me it would be 
+jcpistell.github.io/pml_demo
+
+You're done!
+
+To update/edit, you need to make sure you are in your gh-pages branch when you 
+commit updates. After you make any edits to your .Rmd/html files you can type 
+the following into Git Bash:
+
+git checkout gh-pages
+git add .
+git commit -m 'your text here'
+git checkout master
+git merge gh-pages
+
+
+This syncs up your gh-pages branch and your master branch.  Finally, type:
+
+git push origin --all
+
+
+In a seperate comment below I'll go over some common problems. Hope this helps!
+
+
+https://github.com/JohnTD500/08_MachineLearn/tree/master
+https://johntd500.github.io/08_MachineLearn/Index.html
+
+
+#### Feb 16, 2015 ####
+
+0) cd /home/jwt/WA/School/Coursera/DataScience_JohnsHopkins/09_DataProducts/Project
+
+1) git init
+
+2) git status
+On branch master
+
+Initial commit
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+
+        .gitignore
+        License.md
+        README.md
+        code/
+        git_step-by-step.txt
+        presentation/
+        prompt.txt
+        rubric.txt
+
+nothing added to commit but untracked files present (use "git add" to track)
+
+3) git add .
+
+4) git status
+On branch master
+
+Initial commit
+
+Changes to be committed:
+  (use "git rm --cached <file>..." to unstage)
+
+        new file:   .gitignore
+        new file:   License.md
+        new file:   README.md
+        new file:   code/helpers.R
+        new file:   code/server.R
+        new file:   code/shinyapps/johntd500/code.dcf
+        new file:   code/ui.R
+        new file:   git_step-by-step.txt
+        new file:   presentation/.nojekyll
+        new file:   presentation/assets/css/ribbons.css
+        new file:   presentation/assets/img/JohnLKellyJr.png
+        new file:   presentation/begin_slidify.R
+        new file:   presentation/index.Rmd
+        new file:   presentation/index.html
+        new file:   presentation/index.md
+        new file:   presentation/libraries/frameworks/io2012/README.md
+[snip]
+
+4) git commit -m "Initial Commit"
+[lots of files commited]
+
+5) git remote add origin https://github.com/JohnTD500/DataScience-09_DataProducts.git
+[already set up repository on github]
+
+6) git push -u origin master
+Username for 'https://github.com': JohnTD500
+Password for 'https://JohnTD500@github.com': 
+Counting objects: 778, done.
+Delta compression using up to 4 threads.
+Compressing objects: 100% (716/716), done.
+Writing objects: 100% (778/778), 1.60 MiB | 317.00 KiB/s, done.
+Total 778 (delta 201), reused 0 (delta 0)
+To https://github.com/JohnTD500/DataScience-09_DataProducts.git
+ * [new branch]      master -> master
+Branch master set up to track remote branch master from origin.
+
+7) git branch gh-pages
+
+8) git push origin gh-pages
+Username for 'https://github.com': JohnTD500
+Password for 'https://JohnTD500@github.com': 
+Total 0 (delta 0), reused 0 (delta 0)
+To https://github.com/JohnTD500/DataScience-09_DataProducts.git
+ * [new branch]      gh-pages -> gh-pages
+
+9) Look at this page: http://JohnTD500.github.io/DataScience-09_DataProducts/index.html
+[Page was not there!]
+
+10) cp presentation/index.html .
+
+11) git add index.html
+
+12) git push origin gh-pages
+Username for 'https://github.com': JohnTD500
+Password for 'https://JohnTD500@github.com': 
+Everything up-to-date
+ninja{jwt}% git status
+On branch master
+Your branch is ahead of 'origin/master' by 1 commit.
+  (use "git push" to publish your local commits)
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+
+        modified:   #git_step-by-step.txt#
+        modified:   git_step-by-step.txt
+
+no changes added to commit (use "git add" and/or "git commit -a")
+
+13) git push
+warning: push.default is unset; its implicit value is changing in
+Git 2.0 from 'matching' to 'simple'. To squelch this message
+and maintain the current behavior after the default changes, use:
+
+  git config --global push.default matching
+
+To squelch this message and adopt the new behavior now, use:
+
+  git config --global push.default simple
+
+When push.default is set to 'matching', git will push local branches
+to the remote branches that already exist with the same name.
+
+In Git 2.0, Git will default to the more conservative 'simple'
+behavior, which only pushes the current branch to the corresponding
+remote branch that 'git pull' uses to update the current branch.
+
+See 'git help config' and search for 'push.default' for further information.
+(the 'simple' mode was introduced in Git 1.7.11. Use the similar mode
+'current' instead of 'simple' if you sometimes use older versions of Git)
+
+Username for 'https://github.com': JohnTD500
+Password for 'https://JohnTD500@github.com': 
+Counting objects: 3, done.
+Delta compression using up to 4 threads.
+Compressing objects: 100% (2/2), done.
+Writing objects: 100% (2/2), 283 bytes | 0 bytes/s, done.
+Total 2 (delta 1), reused 0 (delta 0)
+To https://github.com/JohnTD500/DataScience-09_DataProducts.git
+   54a37b6..f408417  master -> master
+
+14) git merge master
+Already up-to-date.
+
+15) git merge gh-pages
+Already up-to-date.
+
+16) git checkout gh-pages
+M       #git_step-by-step.txt#
+M       git_step-by-step.txt
+Switched to branch 'gh-pages'
+
+17) git rebase master
+Cannot rebase: You have unstaged changes.
+Please commit or stash them.
+
+18) git commit -m "delete files"
+
+19) git rm -f \#git_step-by-step.txt\# .\#git_step-by-step.txt
+rm '#git_step-by-step.txt#'
+rm '.#git_step-by-step.txt'
+
+20) git add git_step-by-step.txt
+
+21) git commit -m "deleted files"
+[gh-pages 0442a96] deleted files
+ 3 files changed, 161 insertions(+), 263 deletions(-)
+ delete mode 100644 #git_step-by-step.txt#
+ delete mode 120000 .#git_step-by-step.txt
+
+22) git merge master
+Merge made by the 'recursive' strategy.
+ index.html | 228 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 228 insertions(+)
+ create mode 100644 index.html
+
+23) git push
+warning: push.default is unset; its implicit value is changing in
+Git 2.0 from 'matching' to 'simple'. To squelch this message
+and maintain the current behavior after the default changes, use:
+
+  git config --global push.default matching
+
+To squelch this message and adopt the new behavior now, use:
+
+  git config --global push.default simple
+
+When push.default is set to 'matching', git will push local branches
+to the remote branches that already exist with the same name.
+
+In Git 2.0, Git will default to the more conservative 'simple'
+behavior, which only pushes the current branch to the corresponding
+remote branch that 'git pull' uses to update the current branch.
+
+See 'git help config' and search for 'push.default' for further information.
+(the 'simple' mode was introduced in Git 1.7.11. Use the similar mode
+'current' instead of 'simple' if you sometimes use older versions of Git)
+
+Username for 'https://github.com': JohnTD500
+Password for 'https://JohnTD500@github.com': 
+Counting objects: 8, done.
+Delta compression using up to 4 threads.
+Compressing objects: 100% (5/5), done.
+Writing objects: 100% (5/5), 1.70 KiB | 0 bytes/s, done.
+Total 5 (delta 3), reused 0 (delta 0)
+To https://github.com/JohnTD500/DataScience-09_DataProducts.git
+   54a37b6..a037d03  gh-pages -> gh-pages
+
+24) git config --global push.default simple
+
+25) git config --list
+user.name=John Tiede
+user.email=j.tiede@comcast.net
+color.ui=true
+core.editor=emacs
+push.default=simple
+core.repositoryformatversion=0
+core.filemode=true
+core.bare=false
+core.logallrefupdates=true
+remote.origin.url=https://github.com/JohnTD500/DataScience-09_DataProducts.git
+remote.origin.fetch=+refs/heads/*:refs/remotes/origin/*
+branch.master.remote=origin
+branch.master.merge=refs/heads/master
+
+26) Now it finds a web page but does not display it.

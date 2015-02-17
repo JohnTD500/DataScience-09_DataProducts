@@ -1,0 +1,54 @@
+Part 1:
+1. Use this space to provide constructive feedback to the student who
+submitted the work. Point out the strengths of their application, and give
+them advice about how it could be improved in the future.
+
+2. Was there enough documentation on the shiny site for a user to get started
+using the application?
+
+3. Did the application run as described in the documentation?
+
+4. Was there some form of widget input (slider, textbox, radio buttons,
+checkbox, ...) in either ui.R or a custom web page?
+
+5. Did server.R perform some calculations on the input in server.R?
+
+6. Was the server calculation displayed in the html page?
+
+7. Was the app substantively different than the very simple applications
+built in the class? Note, it's OK if the app is simple and based on the one
+presented in class, I just don't want it to be basically a carbon copy of the
+examples we covered. As an example, if someone simply changed the variable
+names, then this would not count. However, a prediction algorithm that had
+a similar layout would be fine.
+
+8. Here's your opportunity to give the app +1 for being well done, or neat,
+or even just a solid effort.
+
+9. If any of your grading decisions require explanation, please note your
+explanations here.
+
+======================================================================
+
+Part 2:
+
+1. Was the presentation completed in slidify or R Presenter?
+
+2. Was it 5 pages?
+
+3. Did it contain an R expression that got evaluated and displayed?
+
+4. Was it hosted on github or Rpubs?
+
+5. Was the presentation actually a presentation? (I.e. it had a legitimate
+pitch for the shiny application?)
+
+6. Here's your opportunity to give this presentation a +1 for being well done.
+Did they tinker around with the default style? Was the presentation
+particularly lucid and well organized? In other words, the student made a
+legitimate try.
+
+7. There were no R errors displayed in the presentation.
+
+8. If any of your grading decisions require explanation, please note your
+explanations here.
